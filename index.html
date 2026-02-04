@@ -3,469 +3,1455 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIPLUSTECH LTD - AI-Powered Tools for Life, Work & Entertainment</title>
+    <title>AIPlusTech - AI-Powered Innovation for Everyone</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%234facfe'/><stop offset='100%' stop-color='%2300f2fe'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23g)'/><text x='50' y='65' font-size='40' font-weight='bold' text-anchor='middle' fill='white'>A+</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        :root {
+            --primary: #4facfe;
+            --primary-dark: #00f2fe;
+            --accent: #7c3aed;
+            --dark: #0a0a0f;
+            --darker: #050508;
+            --light: #ffffff;
+            --gray: #a0a0a0;
+            --gray-dark: #1a1a2e;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--light);
             line-height: 1.6;
-            color: #333;
+            overflow-x: hidden;
         }
-        
-        header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 1rem 2rem;
+
+        /* Animated Background */
+        .bg-animation {
             position: fixed;
-            width: 100%;
             top: 0;
-            z-index: 1000;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, #0d1033 100%);
         }
-        
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(79, 172, 254, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 242, 254, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(124, 58, 237, 0.05) 0%, transparent 40%);
+            animation: bgPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 12s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; animation-duration: 18s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; animation-duration: 14s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; animation-duration: 16s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; animation-duration: 20s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; animation-duration: 13s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2s; animation-duration: 17s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 4s; animation-duration: 15s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1s; animation-duration: 19s; }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+
+        /* Navigation */
         nav {
-            max-width: 1200px;
-            margin: 0 auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
+            background: transparent;
         }
-        
+
+        nav.scrolled {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-        
-        .logo span {
-            color: #4facfe;
-        }
-        
-        nav ul {
             display: flex;
-            list-style: none;
-            gap: 2rem;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
         }
-        
-        nav a {
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 900;
             color: white;
+            -webkit-text-fill-color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        
-        nav a:hover {
-            color: #4facfe;
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            transition: width 0.3s ease;
         }
-        
+
+        .nav-links a:hover {
+            color: var(--light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 2px;
+            background: var(--light);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: white;
-            padding: 10rem 2rem 6rem;
-            text-align: center;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
+            text-align: center;
+            padding: 120px 5% 80px;
+            position: relative;
         }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
+
+        .hero-content {
+            max-width: 900px;
         }
-        
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: #1a1a2e;
-            padding: 1rem 2.5rem;
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(79, 172, 254, 0.1);
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            padding: 0.5rem 1rem;
             border-radius: 50px;
-            text-decoration: none;
+            font-size: 0.85rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
             font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
         }
-        
-        .btn:hover {
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--dark);
+            box-shadow: 0 4px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+            box-shadow: 0 8px 30px rgba(79, 172, 254, 0.6);
         }
-        
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Section */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.8s ease 0.8s backwards;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
         section {
-            padding: 5rem 2rem;
+            padding: 100px 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(79, 172, 254, 0.1);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* Mission Section */
+        .mission {
+            background: linear-gradient(180deg, transparent 0%, rgba(79, 172, 254, 0.03) 50%, transparent 100%);
+        }
+
+        .mission-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .mission-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .mission-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(79, 172, 254, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .mission-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Products Section - New Centered Layout */
+        .products {
+            background: var(--darker);
+        }
+
+        .product-category {
+            margin-bottom: 5rem;
+        }
+
+        .product-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-header p {
+            color: var(--gray);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
-        
-        .section-title {
+
+        .products-grid.two-cols {
+            grid-template-columns: repeat(2, 1fr);
+            max-width: 800px;
+        }
+
+        .products-grid.four-cols {
+            grid-template-columns: repeat(4, 1fr);
+            max-width: 1200px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
             text-align: center;
-            font-size: 2.5rem;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: var(--card-color, var(--primary));
+            border-radius: 0 0 3px 3px;
+            opacity: 0;
+            transition: opacity 0.4s ease, width 0.4s ease;
+        }
+
+        .product-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+            width: 100%;
+        }
+
+        .product-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: white;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .product-domain {
+            color: var(--gray);
+            font-size: 0.85rem;
             margin-bottom: 1rem;
-            color: #1a1a2e;
         }
-        
-        .section-subtitle {
-            text-align: center;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto 3rem;
+
+        .product-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        
+
+        .badge-live {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .badge-soon {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+        }
+
+        .product-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features li {
+            color: var(--gray);
+            font-size: 0.8rem;
+            padding: 0.35rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--card-color, var(--primary));
+            font-weight: bold;
+        }
+
+        .product-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: gap 0.3s ease;
+        }
+
+        .product-link:hover {
+            gap: 0.75rem;
+        }
+
+        /* Category Colors */
+        .news-category .category-icon { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .education-category .category-icon { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .tools-category .category-icon { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+
+        /* Product Card Colors */
+        .news-card { --card-color: #f59e0b; }
+        .news-card .product-logo { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+        .news-card .product-features li::before { color: #f59e0b; }
+
+        .movie-card { --card-color: #ef4444; }
+        .movie-card .product-logo { background: linear-gradient(135deg, #ef4444, #f87171); }
+        .movie-card .product-features li::before { color: #ef4444; }
+
+        .music-card { --card-color: #10b981; }
+        .music-card .product-logo { background: linear-gradient(135deg, #10b981, #34d399); }
+        .music-card .product-features li::before { color: #10b981; }
+
+        .english-card { --card-color: #8b5cf6; }
+        .english-card .product-logo { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+        .english-card .product-features li::before { color: #8b5cf6; }
+
+        .japanese-card { --card-color: #ec4899; }
+        .japanese-card .product-logo { background: linear-gradient(135deg, #ec4899, #f472b6); }
+        .japanese-card .product-features li::before { color: #ec4899; }
+
+        .chinese-card { --card-color: #ef4444; }
+        .chinese-card .product-logo { background: linear-gradient(135deg, #ef4444, #f87171); }
+        .chinese-card .product-features li::before { color: #ef4444; }
+
+        .spanish-card { --card-color: #f97316; }
+        .spanish-card .product-logo { background: linear-gradient(135deg, #f97316, #fb923c); }
+        .spanish-card .product-features li::before { color: #f97316; }
+
+        .picture-card { --card-color: #06b6d4; }
+        .picture-card .product-logo { background: linear-gradient(135deg, #06b6d4, #22d3ee); }
+        .picture-card .product-features li::before { color: #06b6d4; }
+
+        .translate-card { --card-color: #3b82f6; }
+        .translate-card .product-logo { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+        .translate-card .product-features li::before { color: #3b82f6; }
+
+        .template-card { --card-color: #a855f7; }
+        .template-card .product-logo { background: linear-gradient(135deg, #a855f7, #c084fc); }
+        .template-card .product-features li::before { color: #a855f7; }
+
+        /* About Section */
+        .about {
+            background: linear-gradient(180deg, var(--darker) 0%, var(--dark) 100%);
+        }
+
         .about-content {
+            max-width: 1100px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
         }
-        
+
         .about-text h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #1a1a2e;
-        }
-        
-        .about-text p {
-            margin-bottom: 1rem;
-            color: #555;
-        }
-        
-        .about-visual {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-        }
-        
-        .about-visual .icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-        
-        .about-visual p {
-            color: white;
-            font-size: 1.1rem;
-        }
-        
-        .services {
-            background: #f8f9fa;
-        }
-        
-        .services-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-        
-        .service-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .service-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .service-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: #1a1a2e;
-        }
-        
-        .service-card p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-        
-        .products {
-            background: white;
-        }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-        
-        .product-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 2.5rem;
-            border-radius: 15px;
-            border-left: 4px solid #4facfe;
-        }
-        
-        .product-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
-            color: #1a1a2e;
-        }
-        
-        .product-card p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-        
-        .product-card .status {
-            display: inline-block;
-            background: #4facfe;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-        
-        .contact {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-        }
-        
-        .contact .section-title {
-            color: white;
-        }
-        
-        .contact .section-subtitle {
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1.5rem;
         }
-        
-        .contact-item {
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .about-feature {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            margin-bottom: 1.5rem;
         }
-        
-        .contact-item .icon {
+
+        .about-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(79, 172, 254, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .about-feature-text h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .about-feature-text p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin: 0;
+        }
+
+        .about-visual {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .brand-tile {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .brand-tile:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .brand-tile .icon {
             font-size: 1.5rem;
+            margin-bottom: 0.5rem;
         }
-        
-        .contact-item p {
-            opacity: 0.9;
+
+        .brand-tile .name {
+            font-size: 0.7rem;
+            color: var(--gray);
+            font-weight: 500;
         }
-        
-        .contact-item a {
-            color: #4facfe;
-            text-decoration: none;
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(180deg, var(--dark) 0%, var(--darker) 100%);
         }
-        
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 3rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
         .contact-form input,
         .contact-form textarea {
             width: 100%;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border: none;
-            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--light);
             font-size: 1rem;
             font-family: inherit;
+            transition: all 0.3s ease;
         }
-        
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(79, 172, 254, 0.05);
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--gray);
+        }
+
         .contact-form textarea {
-            height: 150px;
             resize: vertical;
+            min-height: 150px;
+            margin-bottom: 1.5rem;
         }
-        
+
         .contact-form button {
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            border: none;
-            border-radius: 8px;
-            color: #1a1a2e;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s;
         }
-        
-        .contact-form button:hover {
-            transform: translateY(-2px);
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
         }
-        
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gray);
+        }
+
+        .contact-item span {
+            font-size: 1.25rem;
+        }
+
+        /* Footer */
         footer {
-            background: #0d0d1a;
-            color: white;
+            background: var(--darker);
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+            color: var(--light);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
-            padding: 2rem;
         }
-        
-        footer p {
-            opacity: 0.7;
+
+        .footer-bottom p {
+            color: var(--gray);
+            font-size: 0.85rem;
         }
-        
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
+
+        /* Mobile Styles */
+        @media (max-width: 1100px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .hero h1 {
-                font-size: 2rem;
+            .products-grid.four-cols {
+                grid-template-columns: repeat(2, 1fr);
             }
-            
-            .about-content,
-            .services-grid,
-            .products-grid,
-            .contact-grid {
+        }
+
+        @media (max-width: 968px) {
+            .about-content {
                 grid-template-columns: 1fr;
             }
-            
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 15, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero {
+                padding: 100px 5% 60px;
+            }
+
+            .stats {
+                gap: 2rem;
+            }
+
+            .products-grid,
+            .products-grid.two-cols,
+            .products-grid.four-cols {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
             .about-visual {
-                order: -1;
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-visual {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-form {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">AIPLUS<span>TECH</span></div>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
+    <div class="bg-animation"></div>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">A+</div>
+            AIPlusTech
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu-btn" id="mobileMenuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
     <section class="hero">
-        <h1>AI-Powered Tools for Modern Life</h1>
-        <p>AIPLUSTECH develops intelligent applications that enhance productivity, streamline workflows, and bring efficiency to everyday tasks. We harness the power of artificial intelligence to create tools that make a real difference.</p>
-        <a href="#contact" class="btn">Get in Touch</a>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>Empowering the Future with AI</span>
+            </div>
+            <h1>
+                <span class="gradient-text">AI-Powered Innovation</span><br>
+                for Everyone
+            </h1>
+            <p class="hero-description">
+                Building intelligent products across news, education, and productivity tools — 
+                delivering smart, personalized content and services to users worldwide.
+            </p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">
+                    Explore Products
+                    <span>→</span>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    Get in Touch
+                </a>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">AI Products</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Business Domains</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Live Product</div>
+                </div>
+            </div>
+        </div>
     </section>
-    
-    <section id="about">
-        <h2 class="section-title">About AIPLUSTECH</h2>
-        <p class="section-subtitle">A UK-based software development company focused on building the next generation of AI-enhanced applications.</p>
+
+    <!-- Mission Section -->
+    <section class="mission" id="mission">
+        <div class="section-header">
+            <span class="section-tag">Our Mission</span>
+            <h2>Transforming Ideas into Intelligent Solutions</h2>
+            <p>Leveraging AI technology to create innovative products that deliver smart, personalized experiences.</p>
+        </div>
+        <div class="mission-content">
+            <div class="mission-card">
+                <div class="mission-icon">🎯</div>
+                <h3>Vision</h3>
+                <p>To become a leading AI product company, delivering intelligent solutions that enhance daily life through news, education, and productivity tools.</p>
+            </div>
+            <div class="mission-card">
+                <div class="mission-icon">💡</div>
+                <h3>Innovation</h3>
+                <p>We believe in the power of AI to simplify complexity. Our products are designed to be intuitive, efficient, and genuinely useful.</p>
+            </div>
+            <div class="mission-card">
+                <div class="mission-icon">🌍</div>
+                <h3>Global Reach</h3>
+                <p>Building products for users worldwide, with multi-language support and localized experiences at the core of our development.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header">
+            <span class="section-tag">Our Products</span>
+            <h2>AI-Powered Product Ecosystem</h2>
+            <p>A comprehensive suite of intelligent tools across three core domains.</p>
+        </div>
+
+        <!-- Information Platforms -->
+        <div class="product-category news-category">
+            <div class="category-header">
+                <h3>Information Platforms</h3>
+                <p>AI-driven content curation and personalized recommendations</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card news-card">
+                    <div class="product-logo">📰</div>
+                    <div class="product-name">NewsPlus</div>
+                    <div class="product-domain">newsplus.ai</div>
+                    <p class="product-description">AI-powered daily news summaries with personalized recommendations.</p>
+                    <ul class="product-features">
+                        <li>AI-generated news summaries</li>
+                        <li>Personalized content feed</li>
+                        <li>Multi-source aggregation</li>
+                    </ul>
+                </div>
+
+                <div class="product-card movie-card">
+                    <div class="product-logo">🎬</div>
+                    <div class="product-name">MoviePlus</div>
+                    <div class="product-domain">movieplus.ai</div>
+                    <p class="product-description">Discover your next favorite film with AI recommendations.</p>
+                    <ul class="product-features">
+                        <li>Smart movie recommendations</li>
+                        <li>Cast & crew information</li>
+                        <li>Personalized watchlists</li>
+                    </ul>
+                </div>
+
+                <div class="product-card music-card">
+                    <div class="product-logo">🎵</div>
+                    <div class="product-name">MusicPlus</div>
+                    <div class="product-domain">musicplus.ai</div>
+                    <p class="product-description">AI-curated music discovery with lyric analysis and smart playlists tailored to your taste.</p>
+                    <ul class="product-features">
+                        <li>AI playlist generation</li>
+                        <li>Lyric analysis & meaning</li>
+                        <li>Artist recommendations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Platforms -->
+        <div class="product-category education-category">
+            <div class="category-header">
+                <h3>Education Platforms</h3>
+                <p>AI-enhanced language learning for maximum efficiency</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card japanese-card">
+                    <div class="product-logo">🇯🇵</div>
+                    <div class="product-name">JapanesePlus</div>
+                    <div class="product-domain">japaneseplus.ai</div>
+                    <p class="product-description">Learn Japanese vocabulary with AI-powered kanji recognition learning.</p>
+                    <ul class="product-features">
+                        <li>Kanji & hiragana support</li>
+                        <li>AI pronunciation guide</li>
+                        <li>Cultural context notes</li>
+                    </ul>
+                    <span class="product-badge badge-soon">Launching Soon</span>
+                </div>
+
+                <div class="product-card chinese-card">
+                    <div class="product-logo">🇨🇳</div>
+                    <div class="product-name">ChinesePlus</div>
+                    <div class="product-domain">chineseplus.ai</div>
+                    <p class="product-description">Master Mandarin Chinese with AI-assisted character learning and tone training.</p>
+                    <ul class="product-features">
+                        <li>Character stroke order</li>
+                        <li>Tone pronunciation AI</li>
+                        <li>HSK level tracking</li>
+                    </ul>
+                </div>
+
+                <div class="product-card spanish-card">
+                    <div class="product-logo">🇪🇸</div>
+                    <div class="product-name">SpanishPlus</div>
+                    <div class="product-domain">spanishplus.ai</div>
+                    <p class="product-description">Learn Spanish vocabulary with AI-powered conjugation help and regional variants.</p>
+                    <ul class="product-features">
+                        <li>Verb conjugation trainer</li>
+                        <li>Regional accent options</li>
+                        <li>Contextual examples</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Productivity Tools -->
+        <div class="product-category tools-category">
+            <div class="category-header">
+                <h3>Productivity Tools</h3>
+                <p>Smart utilities to boost your efficiency and creativity</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card picture-card">
+                    <div class="product-logo">🖼️</div>
+                    <div class="product-name">PicturePlus</div>
+                    <div class="product-domain">pictureplus.ai</div>
+                    <p class="product-description">Stunning HD wallpapers for every taste. Browse curated collections or generate custom wallpapers with AI.</p>
+                    <ul class="product-features">
+                        <li>Curated HD wallpaper gallery</li>
+                        <li>AI wallpaper generation</li>
+                        <li>Custom prompt support</li>
+                    </ul>
+                    <span class="product-badge badge-soon">Launching Soon</span>
+                </div>
+
+                <div class="product-card template-card">
+                    <div class="product-logo">📄</div>
+                    <div class="product-name">TemplatesPlus</div>
+                    <div class="product-domain">templatesplus.ai</div>
+                    <p class="product-description">AI-powered template generator for resumes, emails, and documents. Create professional content in seconds.</p>
+                    <ul class="product-features">
+                        <li>Resume & CV builder</li>
+                        <li>Email templates</li>
+                        <li>Document generation</li>
+                    </ul>
+                </div>
+				
+                <div class="product-card translate-card">
+                    <div class="product-logo">🌐</div>
+                    <div class="product-name">TranslatePlus</div>
+                    <div class="product-domain">translateplus.ai</div>
+                    <p class="product-description">Next-generation translation with AI context understanding for accurate, natural translations.</p>
+                    <ul class="product-features">
+                        <li>Context-aware translation</li>
+                        <li>Multiple language pairs</li>
+                        <li>Tone & style preservation</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-header">
+            <span class="section-tag">About Us</span>
+            <h2>Building the Future of AI Products</h2>
+            <p>AIPlusTech Limited is dedicated to creating intelligent solutions that make a difference.</p>
+        </div>
         <div class="about-content">
             <div class="about-text">
-                <h3>Our Mission</h3>
-                <p>At AIPLUSTECH, we believe artificial intelligence should be accessible to everyone. Our mission is to develop intuitive, powerful applications that leverage AI to solve real problems in work, life, and entertainment.</p>
-                <h3>Our Approach</h3>
-                <p>We focus on creating tools that are both sophisticated and user-friendly. Every application we build is designed with the end user in mind, ensuring that advanced AI capabilities are delivered through simple, elegant interfaces.</p>
-                <h3>Company Information</h3>
-                <p>AIPLUSTECH LTD is a registered company in England and Wales, dedicated to software development and AI innovation.</p>
+                <h3>Why AIPlusTech?</h3>
+                <p>We're not just building apps — we're crafting intelligent experiences. Every product in our ecosystem is designed with a singular focus: leveraging AI to solve real problems and deliver genuine value.</p>
+                <p>Our "Plus" philosophy means going beyond the basics. Whether it's learning vocabulary, discovering content, or boosting productivity, we add the AI advantage that makes the difference.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="about-feature-icon">🎯</div>
+                        <div class="about-feature-text">
+                            <h4>Focused Solutions</h4>
+                            <p>Each product solves one problem exceptionally well</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">⚡</div>
+                        <div class="about-feature-text">
+                            <h4>AI-First Approach</h4>
+                            <p>Built from the ground up with AI at the core</p>
+                        </div>
+                    </div>
+                    <div class="about-feature">
+                        <div class="about-feature-icon">🌐</div>
+                        <div class="about-feature-text">
+                            <h4>Global Vision</h4>
+                            <p>Designed for users worldwide, with localization in mind</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="about-visual">
-                <div class="icon">🚀</div>
-                <p>Building intelligent solutions for tomorrow's challenges</p>
+                <div class="brand-tile">
+                    <div class="icon">📰</div>
+                    <div class="name">NewsPlus</div>
+                </div>
+                <div class="brand-tile">
+                    <div class="icon">🎬</div>
+                    <div class="name">MoviePlus</div>
+                </div>
+                <div class="brand-tile">
+                    <div class="icon">🎵</div>
+                    <div class="name">MusicPlus</div>
+                </div>
+                <div class="brand-tile">
+                    <div class="icon">🇯🇵</div>
+                    <div class="name">JapanesePlus</div>
+                </div>
+                <div class="brand-tile">
+                    <div class="icon">🇨🇳</div>
+                    <div class="name">ChinesePlus</div>
+                </div>
+                <div class="brand-tile">
+                    <div class="icon">🇪🇸</div>
+                    <div class="name">SpanishPlus</div>
+                </div>
+                <div class="brand-tile">
+                    <div class="icon">🖼️</div>
+                    <div class="name">PicturePlus</div>
+                </div>
+				<div class="brand-tile">
+				    <div class="icon">📄</div>
+				    <div class="name">TemplatesPlus</div>
+				</div>
+                <div class="brand-tile" style="background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1)); border-color: rgba(79, 172, 254, 0.3);">
+                    <div class="icon">✨</div>
+                    <div class="name">More Coming</div>
+                </div>
             </div>
         </div>
     </section>
-    
-    <section id="services" class="services">
-        <div class="services-inner">
-            <h2 class="section-title">What We Do</h2>
-            <p class="section-subtitle">We specialise in developing AI-powered applications across multiple platforms and use cases.</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="icon">📱</div>
-                    <h3>Mobile Applications</h3>
-                    <p>Native iOS and Android applications that bring AI capabilities to your pocket. Built for performance, designed for simplicity.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">🤖</div>
-                    <h3>AI Integration</h3>
-                    <p>Intelligent features powered by machine learning and natural language processing, making applications smarter and more responsive.</p>
-                </div>
-                <div class="service-card">
-                    <div class="icon">⚡</div>
-                    <h3>Productivity Tools</h3>
-                    <p>Applications designed to streamline workflows, automate repetitive tasks, and help users accomplish more with less effort.</p>
-                </div>
-            </div>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <span class="section-tag">Get in Touch</span>
+            <h2>Let's Build Something Amazing</h2>
+            <p>Have questions, suggestions, or partnership ideas? We'd love to hear from you.</p>
         </div>
-    </section>
-    
-    <section id="products" class="products">
-        <h2 class="section-title">Our Products</h2>
-        <p class="section-subtitle">Applications currently in development at AIPLUSTECH.</p>
-        <div class="products-grid">
-            <div class="product-card">
-                <h3>AI Productivity Suite</h3>
-                <p>A collection of intelligent tools designed to enhance daily productivity through smart automation and AI-assisted workflows.</p>
-                <span class="status">In Development</span>
-            </div>
-            <div class="product-card">
-                <h3>Smart Life Assistant</h3>
-                <p>An AI-powered application to help manage everyday tasks, schedules, and decisions with intelligent recommendations.</p>
-                <span class="status">Coming Soon</span>
-            </div>
-        </div>
-    </section>
-    
-    <section id="contact" class="contact">
-        <h2 class="section-title">Contact Us</h2>
-        <p class="section-subtitle">Have a question or want to learn more about our products? Get in touch.</p>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <h3>Get in Touch</h3>
-                <div class="contact-item">
-                    <div class="icon">📧</div>
-                    <div>
-                        <p><strong>Email</strong></p>
-                        <p><a href="mailto:admin@aiplustech.ai">admin@aiplustech.ai</a></p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="icon">🏢</div>
-                    <div>
-                        <p><strong>Company</strong></p>
-                        <p>AIPLUSTECH LTD</p>
-                        <p>Registered in England and Wales</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="icon">🌐</div>
-                    <div>
-                        <p><strong>Website</strong></p>
-                        <p><a href="https://aiplustech.ai">www.aiplustech.ai</a></p>
-                    </div>
-                </div>
-            </div>
+        <div class="contact-content">
             <form action="https://formspree.io/f/maqdwywk" method="POST" class="contact-form">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                </div>
                 <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-                <button type="submit" class="btn btn-primary">Send Message</button>
+                <button type="submit" class="btn btn-primary">
+                    Send Message
+                    <span>→</span>
+                </button>
             </form>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:admin@aiplustech.ai" style="color: inherit; text-decoration: none;">admin@aiplustech.ai</a>
+                </div>
+                <div class="contact-item">
+                    <span>🌐</span>
+                    <a href="https://aiplustech.ai" style="color: inherit; text-decoration: none;">aiplustech.ai</a>
+                </div>
+            </div>
         </div>
     </section>
-    
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 AIPLUSTECH LTD. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon">A+</div>
+                    AIPlusTech
+                </a>
+                <p>Leveraging artificial intelligence to create innovative products across news, education, and productivity — delivering smart, personalized experiences to users worldwide.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="https://newsplus.ai" target="_blank">NewsPlus.ai</a></li>
+                    <li><a href="https://movieplus.ai" target="_blank">MoviePlus.ai</a></li>
+                    <li><a href="https://musicplus.ai" target="_blank">MusicPlus.ai</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Education</h4>
+                <ul>
+                    <li><a href="https://japaneseplus.ai" target="_blank">JapanesePlus.ai</a></li>
+                    <li><a href="https://chineseplus.ai" target="_blank">ChinesePlus.ai</a></li>
+                    <li><a href="https://spanishplus.ai" target="_blank">SpanishPlus.ai</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="https://pictureplus.ai" target="_blank">PicturePlus.ai</a></li>
+                    <li><a href="https://templatesplus.ai" target="_blank">TemplatesPlus.ai</a></li>
+					<li><a href="https://translateplus.ai" target="_blank">TranslatePlus.ai</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 AIPlusTech Limited. All rights reserved.</p>
+        </div>
     </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.mission-card, .product-card, .brand-tile').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
