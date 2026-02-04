@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIPLUSTECH LTD - AI-Powered Tools for Life, Work & Entertainment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: #4facfe;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #4facfe;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 10rem 2rem 6rem;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: #1a1a2e;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        }
+        
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .about-visual {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+        }
+        
+        .about-visual .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .about-visual p {
+            color: white;
+            font-size: 1.1rem;
+        }
+        
+        .services {
+            background: #f8f9fa;
+        }
+        
+        .services-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #1a1a2e;
+        }
+        
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .products {
+            background: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #4facfe;
+        }
+        
+        .product-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #1a1a2e;
+        }
+        
+        .product-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .product-card .status {
+            display: inline-block;
+            background: #4facfe;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .contact {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+        }
+        
+        .contact .section-title {
+            color: white;
+        }
+        
+        .contact .section-subtitle {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-item .icon {
+            font-size: 1.5rem;
+        }
+        
+        .contact-item p {
+            opacity: 0.9;
+        }
+        
+        .contact-item a {
+            color: #4facfe;
+            text-decoration: none;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .contact-form button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            border-radius: 8px;
+            color: #1a1a2e;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .contact-form button:hover {
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background: #0d0d1a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        footer p {
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content,
+            .services-grid,
+            .products-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-visual {
+                order: -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AIPLUS<span>TECH</span></div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h1>AI-Powered Tools for Modern Life</h1>
+        <p>AIPLUSTECH develops intelligent applications that enhance productivity, streamline workflows, and bring efficiency to everyday tasks. We harness the power of artificial intelligence to create tools that make a real difference.</p>
+        <a href="#contact" class="btn">Get in Touch</a>
+    </section>
+    
+    <section id="about">
+        <h2 class="section-title">About AIPLUSTECH</h2>
+        <p class="section-subtitle">A UK-based software development company focused on building the next generation of AI-enhanced applications.</p>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Our Mission</h3>
+                <p>At AIPLUSTECH, we believe artificial intelligence should be accessible to everyone. Our mission is to develop intuitive, powerful applications that leverage AI to solve real problems in work, life, and entertainment.</p>
+                <h3>Our Approach</h3>
+                <p>We focus on creating tools that are both sophisticated and user-friendly. Every application we build is designed with the end user in mind, ensuring that advanced AI capabilities are delivered through simple, elegant interfaces.</p>
+                <h3>Company Information</h3>
+                <p>AIPLUSTECH LTD is a registered company in England and Wales, dedicated to software development and AI innovation.</p>
+            </div>
+            <div class="about-visual">
+                <div class="icon">🚀</div>
+                <p>Building intelligent solutions for tomorrow's challenges</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="services" class="services">
+        <div class="services-inner">
+            <h2 class="section-title">What We Do</h2>
+            <p class="section-subtitle">We specialise in developing AI-powered applications across multiple platforms and use cases.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon">📱</div>
+                    <h3>Mobile Applications</h3>
+                    <p>Native iOS and Android applications that bring AI capabilities to your pocket. Built for performance, designed for simplicity.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🤖</div>
+                    <h3>AI Integration</h3>
+                    <p>Intelligent features powered by machine learning and natural language processing, making applications smarter and more responsive.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">⚡</div>
+                    <h3>Productivity Tools</h3>
+                    <p>Applications designed to streamline workflows, automate repetitive tasks, and help users accomplish more with less effort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="products" class="products">
+        <h2 class="section-title">Our Products</h2>
+        <p class="section-subtitle">Applications currently in development at AIPLUSTECH.</p>
+        <div class="products-grid">
+            <div class="product-card">
+                <h3>AI Productivity Suite</h3>
+                <p>A collection of intelligent tools designed to enhance daily productivity through smart automation and AI-assisted workflows.</p>
+                <span class="status">In Development</span>
+            </div>
+            <div class="product-card">
+                <h3>Smart Life Assistant</h3>
+                <p>An AI-powered application to help manage everyday tasks, schedules, and decisions with intelligent recommendations.</p>
+                <span class="status">Coming Soon</span>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Have a question or want to learn more about our products? Get in touch.</p>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <div class="contact-item">
+                    <div class="icon">📧</div>
+                    <div>
+                        <p><strong>Email</strong></p>
+                        <p><a href="mailto:admin@aiplustech.ai">admin@aiplustech.ai</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">🏢</div>
+                    <div>
+                        <p><strong>Company</strong></p>
+                        <p>AIPLUSTECH LTD</p>
+                        <p>Registered in England and Wales</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="icon">🌐</div>
+                    <div>
+                        <p><strong>Website</strong></p>
+                        <p><a href="https://aiplustech.ai">www.aiplustech.ai</a></p>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" action="#" method="post">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2026 AIPLUSTECH LTD. All rights reserved.</p>
+    </footer>
+</body>
+</html>
